@@ -1,0 +1,51 @@
+<section id="loginSection">
+<div class="text-center mb-2">
+  <i class="fa fa-user-o fa-5x text-primary"></i>
+</div>
+<h2 class="text-primary text-center">Login To Admin</h2>
+<div class="container-fluid mt-5">
+  <div class="row">
+    <div class="col-12 offset-0 col-sm-4 offset-sm-4">
+      <div class="formSection mt-3">
+        <div class="alert-danger text-center" *ngIf="errors.g">
+          <span>{{errors.g[0]}}</span>
+        </div>
+        <form (ngSubmit)="onSubmit()" class="mt-1" [formGroup]="form">
+          <div class="form-group">
+            <input type="text" class="form-control" formControlName="username"
+              [ngClass]="{'border-danger':f.username.touched && f.username.invalid}" 
+              placeholder="Username">
+            <div class="text-danger" *ngIf="f.username.touched && f.username.invalid">
+              <span *ngIf="f.username.errors.required">
+                Username is required
+              </span>
+              <span *ngIf="f.username.errors.g">
+                {{errors.username[0]}}
+              </span>
+            </div>
+          </div>
+          <div class="form-group">
+            <input type="password" class="form-control" formControlName="password"
+              [ngClass]="{'border-danger':f.password.touched && f.password.invalid}" placeholder="Password">
+            <div class="text-danger" *ngIf="f.password.touched && f.password.invalid">
+              <span *ngIf="f.password.errors.required">
+                Password is required
+              </span>
+              <span *ngIf="f.password.errors.g">
+                {{errors.password[0]}}
+              </span>
+            </div>
+          </div>
+        
+          <div class="form-group text-center">
+            <app-loading-button [loading]="loading" type="submit" text="Login Now" [valid]="form.valid">
+            </app-loading-button>
+          </div>
+        </form>
+       
+      </div>
+    </div>
+  </div>
+</div>
+
+</section>

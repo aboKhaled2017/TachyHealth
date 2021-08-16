@@ -1,0 +1,97 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title"> All Customers</h4>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class=" text-primary">
+            <th>
+              Full name
+            </th>
+            <th>
+              Username
+            </th>
+            <th>
+              Email
+            </th>
+            <th>
+              Phone
+            </th>
+            <th>
+              Villa Number
+            </th>
+            <th>
+              Destrict Number
+            </th>
+            <th>
+              Invitations Count
+            </th>
+            <th>Attatchments</th>
+            <th class="text-right">
+              Status
+            </th>
+
+            <th>
+              Controls
+            </th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of data">
+                <td>
+                  {{item.fullName}}
+                </td>
+                <td>
+                  {{item.username}}
+                </td>
+                <td>
+                  {{item.phone}}
+                </td>
+                <td>
+                  {{item.email}}
+                </td>
+                <td>{{item.villaNumber}}</td>
+                <td>{{item.destrictNumber}}</td>
+                <td>{{item.invitationsCount}}</td>
+                <td>
+                  <div *ngFor="let att of item.attachments">
+                    <div>
+                      <img style="width:150px;margin-top:3px;" [src]="att" />
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <span *ngIf="item.userStatus!='InActive'" class="badge badge-success">
+                    Actived
+                  </span>
+                  <span *ngIf="item.userStatus=='InActive'" class=" badge badge-danger">
+                    Not Actived
+                  </span>
+                </td>
+                <td>
+                  <app-loading-button *ngIf="item.userStatus!='InActive'"
+                                      [loading]="isProcessBeingHandled(item.customerId)"
+                                      text="Un Activate"
+                                      (click)="changeStatus(item.customerId)"
+                                      classes="btn btn-danger"
+                                      [valid]="!isProcessBeingHandled(item.customerId)">
+                  </app-loading-button>
+                  <app-loading-button *ngIf="item.userStatus=='InActive'"
+                                      [loading]="isProcessBeingHandled(item.customerId)"
+                                      classes="btn btn-primary"
+                                      text="Activate"
+                                      (click)="changeStatus(item.customerId)"
+                                      [valid]="!isProcessBeingHandled(item.customerId)">
+                  </app-loading-button>
+
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

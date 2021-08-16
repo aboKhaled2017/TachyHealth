@@ -1,0 +1,27 @@
+
+<div class="sidebar-wrapper" *ngIf="this.authService.isAuthenticated()">
+  <div class="logo">
+    <a href="http://www.creative-tim.com" class="simple-text logo-mini">
+      <div class="logo-image-small">
+        <img src="assets/img/angular2-logo.jpg">
+      </div>
+    </a>
+    <a href="#" class="simple-text logo-normal">
+      Gate Invitation
+    </a>
+  </div>
+    <ul class="nav">
+        <li *ngFor="let menuItem of menuItems" routerLinkActive="active" class="{{menuItem.class}}">
+            <a  *ngIf="menuItem.path!='/logout'" [routerLink]="[menuItem.path]">
+                <i class="nc-icon {{menuItem.icon}}"></i>
+                <p class="fa-lg text-primary">{{menuItem.title}}</p>
+            </a>
+            <ng-container *ngIf="this.authService.isAuthenticated()">
+                <a *ngIf="menuItem.path=='/logout'" (click)="logout()">
+                  <i class="nc-icon {{menuItem.icon}}"></i>
+                  <p class="fa-lg text-danger">{{menuItem.title}}</p>
+                </a>
+            </ng-container> 
+        </li>
+    </ul>
+</div>
